@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             
-            observer.unobserve(entry.target); // Run once
+            observer.unobserve(entry.target); 
         });
     }, revealOptions);
 
@@ -39,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =========================================
        2. Dynamic Typing Effect (Hero)
        ========================================= */
-    const typeText = ["Project Manager", "Creative Developer", "Tech Visionary"];
+    // Updated strings for System Analyst & Project Manager
+    const typeText = ["System Analyst", "Project Manager", "Software Engineer"];
     const typeElement = document.getElementById('typewriter');
     let textIndex = 0;
     let charIndex = 0;
@@ -52,54 +53,52 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isDeleting) {
             typeElement.textContent = currentString.substring(0, charIndex - 1);
             charIndex--;
-            typingSpeed = 50; // Faster deletion
+            typingSpeed = 50; 
         } else {
             typeElement.textContent = currentString.substring(0, charIndex + 1);
             charIndex++;
-            typingSpeed = 150; // Normal typing speed
+            typingSpeed = 150; 
         }
 
-        // Logic for pause and switch
         if (!isDeleting && charIndex === currentString.length) {
-            typingSpeed = 2000; // Pause at end of word
+            typingSpeed = 2000; 
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             textIndex = (textIndex + 1) % typeText.length;
-            typingSpeed = 500; // Pause before typing new word
+            typingSpeed = 500; 
         }
 
         setTimeout(type, typingSpeed);
     }
     
-    // Initialize Typist
     setTimeout(type, 1000);
 
 
     /* =========================================
-       3. Vanilla JS 3D Tilt Effect (Magnetic Hover)
+       3. Vanilla JS 3D Tilt Effect
        ========================================= */
     const tiltCards = document.querySelectorAll('.tilt-card');
 
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left; // x position within the element
-            const y = e.clientY - rect.top;  // y position within the element
+            const x = e.clientX - rect.left; 
+            const y = e.clientY - rect.top;  
             
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            const rotateX = ((y - centerY) / centerY) * -5; // Max rotation 5deg
+            const rotateX = ((y - centerY) / centerY) * -5; 
             const rotateY = ((x - centerX) / centerX) * 5;
 
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            card.style.transition = "transform 0.1s ease"; // Quick follow
+            card.style.transition = "transform 0.1s ease"; 
         });
 
         card.addEventListener('mouseleave', () => {
             card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-            card.style.transition = "transform 0.5s ease"; // Smooth snap back
+            card.style.transition = "transform 0.5s ease"; 
         });
     });
 
