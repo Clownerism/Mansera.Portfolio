@@ -12,19 +12,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div id="boot-screen">
+        <div class="boot-content">
+            <h2 class="glitch-text" data-text="SYS.ADMIN_TERMINAL">SYS.ADMIN_TERMINAL</h2>
+            <p class="mono-subtext mb-2 text-muted">> Authenticating user credentials...</p>
+            <p class="mono-subtext mb-2 text-muted">> Loading architecture protocols...</p>
+            <button id="boot-btn" class="btn btn-primary glow-effect">INITIALIZE SYSTEM</button>
+            <p class="mono-subtext mt-3 text-muted" style="font-size: 0.7rem;">[ Audio Required for Optimal Experience ]</p>
+        </div>
+    </div>
+
+    <audio id="bg-music" src="whiplash.mp3" loop preload="auto"></audio>
+
     <div class="cyber-cursor"></div>
     <div class="cyber-cursor-follower"></div>
+    <canvas id="particle-canvas"></canvas>
     <div class="cyber-grid"></div>
     <div class="scanlines"></div>
     
     <div id="cinematic-overlay"></div>
 
     <div id="game-layer" class="hidden">
+        <button id="close-game" class="btn btn-danger">ABORT SEQUENCE [ESC]</button>
         <div class="game-ui">
             <h3>System Override Initiated</h3>
             <p>Catch the Rogue Data Packets: <span id="game-score">0</span> / 10</p>
             <p class="mono-subtext text-muted" id="game-timer">Time remaining: 15.0s</p>
-            <button id="close-game" class="btn btn-secondary mt-3">Abort Sequence</button>
         </div>
         <div id="game-arena"></div>
     </div>
@@ -44,7 +58,7 @@
     <header class="hero container section">
         <div class="hero-grid">
             <div class="hero-image-wrapper reveal">
-                <img src="profile.png" alt="John Phillip Mansera" class="profile-img">
+                <img src="profile.jpg" alt="John Phillip Mansera" class="profile-img">
                 <div class="image-glow"></div>
                 <div class="tech-ring"></div>
             </div>
@@ -56,10 +70,10 @@
                     <span class="typewriter-text" id="typewriter"></span><span class="cursor">|</span>
                 </h1>
                 <p class="hero-desc">
-                    Engineering resilient digital infrastructure. Bridging the gap between rigid backend logic and fluid user experiences.
+                    Engineering resilient digital infrastructure. Bridging the gap between rigid backend logic and fluid user experiences to construct systems that simply do not fail.
                 </p>
                 <div class="hero-actions">
-                    <a href="#projects" class="btn btn-primary glow-effect play-sound" data-freq="600">Initialize Projects</a>
+                    <a href="#projects" class="btn btn-primary glow-effect play-sound" data-freq="600">Deploy Architecture</a>
                     <a href="mailto:mansera.johnphillip@dnsc.edu.ph" class="btn btn-secondary glass-panel play-sound">Ping Network</a>
                 </div>
             </div>
@@ -73,22 +87,22 @@
         </div>
         <div class="about-grid reveal">
             <div class="about-text glass-panel hover-glow">
-                <p>I am a 3rd-year BSIT student driven by the logic of systems and the art of design. My focus lies at the intersection of robust backend architecture and intuitive user interfaces.</p>
+                <p>I am a 3rd-year BSIT scholar operating at the intersection of complex backend logic and visionary design. Over the last three years, my evolution has transitioned from writing basic scripts to architecting enterprise-grade simulations.</p>
                 <br>
-                <p>Beyond writing code, I specialize in comprehensive technical documentation—crafting precise Use Case Diagrams, ERDs, and DFDs to ensure system integrity before a single line of code is compiled.</p>
+                <p>I don't just write code; I orchestrate it. As a specialized Project Manager and Systems Analyst, I design comprehensive Use Case Diagrams, ERDs, and DFDs—ensuring the structural integrity of the application is flawless before a single line of code is committed to the repository.</p>
             </div>
             <div class="competency-list">
                 <div class="comp-item glass-panel magnetic-element play-sound">
-                    <span class="mono-subtext accent">// Core</span>
-                    <h3>Systems Analysis</h3>
-                </div>
-                <div class="comp-item glass-panel magnetic-element play-sound">
-                    <span class="mono-subtext accent">// Leadership</span>
+                    <span class="mono-subtext accent">// Leadership Vector</span>
                     <h3>Project Management</h3>
                 </div>
                 <div class="comp-item glass-panel magnetic-element play-sound">
+                    <span class="mono-subtext accent">// Architecture</span>
+                    <h3>Systems Analysis & Design</h3>
+                </div>
+                <div class="comp-item glass-panel magnetic-element play-sound">
                     <span class="mono-subtext accent">// Research</span>
-                    <h3>Image Processing</h3>
+                    <h3>Image Processing Tech</h3>
                 </div>
             </div>
         </div>
@@ -110,26 +124,26 @@
         <div class="skills-grid reveal">
             <div class="skill-badge glass-panel hover-glow">
                 <div class="skill-header">
-                    <span>Web & Core</span>
-                    <span class="mono-subtext accent">UI/UX</span>
+                    <span>Frontend UI/UX</span>
+                    <span class="mono-subtext accent">Advanced</span>
                 </div>
-                <p class="mono-subtext text-muted mb-2">HTML5, CSS3, JS</p>
+                <p class="mono-subtext text-muted mb-2">HTML5, CSS3, JavaScript</p>
                 <div class="progress"><div class="bar" style="--w: 95%"></div></div>
             </div>
 
             <div class="skill-badge glass-panel hover-glow">
                 <div class="skill-header">
-                    <span>Backend Logic</span>
-                    <span class="mono-subtext accent">Server</span>
+                    <span>Backend Server</span>
+                    <span class="mono-subtext accent">Proficient</span>
                 </div>
-                <p class="mono-subtext text-muted mb-2">PHP, Laravel</p>
-                <div class="progress"><div class="bar" style="--w: 85%"></div></div>
+                <p class="mono-subtext text-muted mb-2">PHP, Laravel Framework</p>
+                <div class="progress"><div class="bar" style="--w: 88%"></div></div>
             </div>
 
             <div class="skill-badge glass-panel hover-glow">
                 <div class="skill-header">
-                    <span>Native Mobile</span>
-                    <span class="mono-subtext accent">App</span>
+                    <span>Mobile Native</span>
+                    <span class="mono-subtext accent">Proficient</span>
                 </div>
                 <p class="mono-subtext text-muted mb-2">Dart, Flutter, Swift, Kotlin</p>
                 <div class="progress"><div class="bar" style="--w: 80%"></div></div>
@@ -137,8 +151,8 @@
 
             <div class="skill-badge glass-panel hover-glow">
                 <div class="skill-header">
-                    <span>Systems & Compute</span>
-                    <span class="mono-subtext accent">OOP</span>
+                    <span>Core OOP / Logic</span>
+                    <span class="mono-subtext accent">Intermediate</span>
                 </div>
                 <p class="mono-subtext text-muted mb-2">Java, C++, C#, Python</p>
                 <div class="progress"><div class="bar" style="--w: 75%"></div></div>
@@ -148,39 +162,77 @@
 
     <section id="projects" class="projects section container">
         <div class="section-header reveal">
-            <h2>03. <span class="accent">Deployed Architecture</span></h2>
+            <h2>03. <span class="accent">Evolutionary Architecture</span></h2>
             <div class="line"></div>
         </div>
+        <p class="mono-subtext text-muted mb-3 reveal">> Documenting progression from 1st-year logic to 3rd-year enterprise systems.</p>
+
         <div class="project-grid">
+            
             <article class="project-card glass-panel reveal tilt-card play-sound">
                 <div class="project-content">
-                    <span class="mono-subtext accent animate-pulse">● Live Simulation (Capstone)</span>
+                    <span class="mono-subtext accent animate-pulse">● 3rd Year: Live Capstone</span>
                     <h3 class="project-title">WharfIntel</h3>
                     <div class="project-desc glass-inset">
-                        <p>Spearheading a real-time maritime logistics simulation platform. Acting as Project Manager and Systems Analyst, orchestrating the architecture alongside Gabriel C. Rusiana (Programmer) and John Wyne A. Tumabiling (Documentarian).</p>
+                        <p>A real-time maritime logistics simulation platform. I lead this as the Project Manager and Systems Analyst, orchestrating data flows alongside Gabriel C. Rusiana (Programmer) and John Wyne A. Tumabiling (Documentarian).</p>
                     </div>
                 </div>
             </article>
 
             <article class="project-card glass-panel reveal tilt-card play-sound">
                 <div class="project-content">
-                    <span class="mono-subtext accent">Startup Initiative</span>
+                    <span class="mono-subtext accent">3rd Year: Startup Initiative</span>
                     <h3 class="project-title">Fabric Grid: TexMap</h3>
                     <div class="project-desc glass-inset">
-                        <p>A GIS-driven platform pioneering the circular economy in the garment industry. Engineered to facilitate localized tailoring services, sustainable event wear discovery, and peer-to-peer uniform exchange.</p>
+                        <p>A GIS-driven platform pioneering the circular economy in the garment industry. Engineered to facilitate localized tailoring services and peer-to-peer uniform exchange networks.</p>
                     </div>
                 </div>
             </article>
 
-            <article class="project-card glass-panel reveal tilt-card play-sound">
-                <div class="project-content">
-                    <span class="mono-subtext accent">Backend Integration</span>
-                    <h3 class="project-title">The Level App</h3>
-                    <div class="project-desc glass-inset">
-                        <p>A complex application focusing on deep backend logic and data routing. This project served as a crucible for mastering database relationships, API endpoints, and secure data handling.</p>
+            <div class="project-split">
+                <article class="project-card glass-panel reveal tilt-card play-sound">
+                    <div class="project-content">
+                        <span class="mono-subtext accent">2nd Year: Fintech Logic</span>
+                        <h3 class="project-title">Transactopia</h3>
+                        <div class="project-desc glass-inset">
+                            <p>Awarded highest cohort grade. A robust financial management system engineered with 6 features including loan management, secure fund transfers, and balance encryption.</p>
+                        </div>
                     </div>
-                </div>
-            </article>
+                </article>
+
+                <article class="project-card glass-panel reveal tilt-card play-sound">
+                    <div class="project-content">
+                        <span class="mono-subtext accent">2nd Year: Backend Matrix</span>
+                        <h3 class="project-title">The Level App</h3>
+                        <div class="project-desc glass-inset">
+                            <p>A complex application focusing purely on deep backend logic, RESTful API endpoints, and secure data routing. The crucible for my database management skills.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="project-split">
+                <article class="project-card glass-panel reveal tilt-card play-sound">
+                    <div class="project-content">
+                        <span class="mono-subtext accent">2nd Year: Healthcare</span>
+                        <h3 class="project-title">Doctor Appointment Sys</h3>
+                        <div class="project-desc glass-inset">
+                            <p>A scheduling application built to optimize medical clinic patient management with automated cron-job notifications and real-time doctor availability tracking.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card glass-panel reveal tilt-card play-sound">
+                    <div class="project-content">
+                        <span class="mono-subtext text-muted">1st Year: Foundations</span>
+                        <h3 class="project-title">Campus Library Kiosk</h3>
+                        <div class="project-desc glass-inset">
+                            <p>An early-stage Object-Oriented application designed to manage student borrowing records. This project cemented my fundamental understanding of CRUD operations and basic UI.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
         </div>
     </section>
 
