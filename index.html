@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Portfolio | Cyberpunk Minimalism</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+
+    <nav class="glass-nav">
+        <div class="nav-content container">
+            <div class="logo">SYS<span class="accent">.ADMIN</span></div>
+            <ul class="nav-links">
+                <li><a href="#about" class="magnetic-link">About</a></li>
+                <li><a href="#skills" class="magnetic-link">Stack</a></li>
+                <li><a href="#projects" class="magnetic-link">Architecture</a></li>
+                <li><a href="#contact" class="magnetic-link">Ping</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero container section">
+        <div class="hero-content reveal">
+            <p class="mono-subtext accent">Initialization complete...</p>
+            <h1 class="hero-title">
+                System Analyst &<br>
+                <span class="typewriter-text" id="typewriter"></span><span class="cursor">|</span>
+            </h1>
+            <p class="hero-desc">
+                Engineering resilient digital infrastructure. Specializing in systems architecture, technical project management, and high-performance development.
+            </p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary glow-effect">Deploy Architecture</a>
+                <a href="#contact" class="btn btn-secondary glass-panel">Initialize Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="about section container">
+        <div class="section-header reveal">
+            <h2>01. <span class="accent">Identity Matrix</span></h2>
+            <div class="line"></div>
+        </div>
+        <div class="about-grid reveal">
+            <div class="about-text glass-panel">
+                <p>I am a 3rd-year BSIT student driven by the logic of systems and the art of design. My focus lies at the intersection of robust backend architecture and intuitive user interfaces.</p>
+                <br>
+                <p>When I'm not architecting databases or managing project lifecycles, I'm analyzing system vulnerabilities and optimizing data flows for maximum efficiency.</p>
+            </div>
+            <div class="competency-list">
+                <div class="comp-item glass-panel magnetic-element">
+                    <span class="mono-subtext accent">// 01</span>
+                    <h3>Systems Analysis</h3>
+                </div>
+                <div class="comp-item glass-panel magnetic-element">
+                    <span class="mono-subtext accent">// 02</span>
+                    <h3>Project Management</h3>
+                </div>
+                <div class="comp-item glass-panel magnetic-element">
+                    <span class="mono-subtext accent">// 03</span>
+                    <h3>Full-Stack Dev</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills section container">
+        <div class="section-header reveal">
+            <h2>02. <span class="accent">Tech Arsenal</span></h2>
+            <div class="line"></div>
+        </div>
+        <div class="skills-grid reveal">
+            <div class="skill-badge glass-panel"><span>HTML5 / CSS3</span><div class="progress"><div class="bar" style="--w: 90%"></div></div></div>
+            <div class="skill-badge glass-panel"><span>JavaScript (ES6+)</span><div class="progress"><div class="bar" style="--w: 85%"></div></div></div>
+            <div class="skill-badge glass-panel"><span>React.js</span><div class="progress"><div class="bar" style="--w: 75%"></div></div></div>
+            <div class="skill-badge glass-panel"><span>Node.js / Express</span><div class="progress"><div class="bar" style="--w: 70%"></div></div></div>
+            <div class="skill-badge glass-panel"><span>SQL / NoSQL</span><div class="progress"><div class="bar" style="--w: 80%"></div></div></div>
+            <div class="skill-badge glass-panel"><span>Git / GitHub</span><div class="progress"><div class="bar" style="--w: 95%"></div></div></div>
+        </div>
+    </section>
+
+    <section id="certs" class="certs section container">
+        <div class="section-header reveal">
+            <h2>03. <span class="accent">Credential Vault</span></h2>
+            <div class="line"></div>
+        </div>
+        <div class="cert-vault reveal">
+            <div class="cert-card glass-panel tilt-card">
+                <div class="cert-icon">🏆</div>
+                <h3>AWS Certified Cloud Practitioner</h3>
+                <p class="mono-subtext text-muted">Issued: 2023 | ID: AWS-12345</p>
+                <div class="cert-glow"></div>
+            </div>
+            <div class="cert-card glass-panel tilt-card">
+                <div class="cert-icon">🛡️</div>
+                <h3>CompTIA Security+</h3>
+                <p class="mono-subtext text-muted">Issued: 2022 | ID: COMP-67890</p>
+                <div class="cert-glow"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects section container">
+        <div class="section-header reveal">
+            <h2>04. <span class="accent">Deployed Architecture</span></h2>
+            <div class="line"></div>
+        </div>
+        <div class="project-grid">
+            
+            <article class="project-card glass-panel reveal tilt-card">
+                <div class="project-content">
+                    <span class="mono-subtext accent">Featured System</span>
+                    <h3 class="project-title">Nexus Management Platform</h3>
+                    <div class="project-desc glass-inset">
+                        <p>A comprehensive web-based platform for managing internal company resources, featuring real-time data visualization, role-based access control, and automated reporting.</p>
+                    </div>
+                    <ul class="tech-stack mono-subtext">
+                        <li>React</li>
+                        <li>Node.js</li>
+                        <li>PostgreSQL</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="#" class="btn-text">&lt; View Source /&gt;</a>
+                        <a href="#" class="btn-text">Live Demo ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card glass-panel reveal tilt-card">
+                <div class="project-content">
+                    <span class="mono-subtext accent">Data Visualization</span>
+                    <h3 class="project-title">CyberMetric Dashboard</h3>
+                    <div class="project-desc glass-inset">
+                        <p>An interactive dashboard simulating network traffic analysis. Built to monitor server health, detect anomalies, and visualize data streams in a highly responsive UI.</p>
+                    </div>
+                    <ul class="tech-stack mono-subtext">
+                        <li>Vue.js</li>
+                        <li>D3.js</li>
+                        <li>Firebase</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="#" class="btn-text">&lt; View Source /&gt;</a>
+                        <a href="#" class="btn-text">Live Demo ↗</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <footer id="contact" class="footer glass-panel">
+        <div class="container footer-content reveal">
+            <h2 class="contact-title">Awaiting Connection...</h2>
+            <p class="mono-subtext text-muted mb-2">Ready to architect the next system?</p>
+            <a href="mailto:hello@example.com" class="btn btn-primary glow-effect">Transmit Message</a>
+            
+            <div class="social-links mt-3">
+                <a href="#" class="magnetic-link">GitHub</a>
+                <a href="#" class="magnetic-link">LinkedIn</a>
+                <a href="#" class="magnetic-link">Twitter</a>
+            </div>
+            
+            <p class="mono-subtext text-muted mt-3 copyright">
+                Designed & Engineered by SYS.ADMIN © <span id="year"></span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
