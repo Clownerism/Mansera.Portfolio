@@ -1,106 +1,121 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Safely set the year
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     /* =========================================
-       0. Boot Sequence & Background Music
+       0. Boot Sequence & Background Music (Safeguarded)
        ========================================= */
     const bootBtn = document.getElementById('boot-btn');
     const bootScreen = document.getElementById('boot-screen');
     const bgMusic = document.getElementById('bg-music');
 
-    bootBtn.addEventListener('click', () => {
-        // This click fulfills the browser requirement to play audio
-        bgMusic.volume = 0.4; // Set a reasonable background volume
-        bgMusic.play().catch(e => console.log("Audio play blocked by browser settings."));
-        
-        bootScreen.style.opacity = '0';
-        setTimeout(() => { bootScreen.remove(); }, 1000);
-        
-        // Init UI Audio context simultaneously
-        initAudio();
-    });
+    if (bootBtn && bootScreen) {
+        bootBtn.addEventListener('click', () => {
+            // Attempt to play music, catch errors if file is missing
+            if (bgMusic) {
+                bgMusic.volume = 0.4;
+                let playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Audio play prevented or file missing: " + error);
+                    });
+                }
+            }
+            
+            // Fade out and disable clicks on the boot screen instantly
+            bootScreen.style.opacity = '0';
+            bootScreen.style.pointerEvents = 'none';
+            setTimeout(() => { bootScreen.style.display = 'none'; }, 600);
+            
+            initAudio(); // Wake up UI sounds
+        });
+    }
 
     /* =========================================
        1. HTML5 Canvas Particle Background Engine
        ========================================= */
     const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    let particlesArray;
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
 
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2;
-            this.speedX = Math.random() * 0.5 - 0.25;
-            this.speedY = Math.random() * 0.5 - 0.25;
-            this.color = Math.random() > 0.5 ? 'rgba(0, 255, 204, 0.4)' : 'rgba(255, 0, 255, 0.2)';
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.color = Math.random() > 0.5 ? 'rgba(0, 255, 204, 0.4)' : 'rgba(255, 0, 255, 0.2)';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            // Wrap around edges
-            if (this.x > canvas.width) this.x = 0;
-            else if (this.x < 0) this.x = canvas.width;
-            if (this.y > canvas.height) this.y = 0;
-            else if (this.y < 0) this.y = canvas.height;
-        }
-        draw() {
-            ctx.fillStyle = this.color;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
 
-    function initParticles() {
-        particlesArray = [];
-        let numberOfParticles = (canvas.width * canvas.height) / 10000; // Density
-        for (let i = 0; i < numberOfParticles; i++) {
-            particlesArray.push(new Particle());
+        function initParticles() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.width * canvas.height) / 9000; 
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
         }
-    }
 
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particlesArray.length; i++) {
-            particlesArray[i].update();
-            particlesArray[i].draw();
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
         }
-        requestAnimationFrame(animateParticles);
+        initParticles();
+        animateParticles();
     }
-    initParticles();
-    animateParticles();
 
     /* =========================================
        2. Custom Cursor Logic
        ========================================= */
     const cursor = document.querySelector('.cyber-cursor');
     const follower = document.querySelector('.cyber-cursor-follower');
-    let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
+    if (cursor && follower) {
+        let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
 
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX; mouseY = e.clientY;
-        cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
-    });
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
 
-    function animateFollower() {
-        followerX += (mouseX - followerX) * 0.15;
-        followerY += (mouseY - followerY) * 0.15;
-        follower.style.left = followerX + 'px';
-        follower.style.top = followerY + 'px';
-        requestAnimationFrame(animateFollower);
+        function animateFollower() {
+            followerX += (mouseX - followerX) * 0.15;
+            followerY += (mouseY - followerY) * 0.15;
+            follower.style.left = followerX + 'px';
+            follower.style.top = followerY + 'px';
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
     }
-    animateFollower();
 
     const interactables = document.querySelectorAll('a, button, .btn, .project-card, .comp-item, .skill-badge, .movie-card');
     interactables.forEach(el => {
@@ -109,14 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================================
-       3. Web Audio Synthesizer Engine (UI Sounds)
+       3. Web Audio Synthesizer Engine
        ========================================= */
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     let audioCtx;
 
     function initAudio() {
-        if (!audioCtx) audioCtx = new AudioContext();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
+        if (!audioCtx) {
+            try { audioCtx = new AudioContext(); } catch(e) {}
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
     }
 
     function playUIBeep(frequency = 440, type = 'sine', duration = 0.05, vol = 0.05) {
@@ -144,58 +163,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================================
-       4. Intersection Observers (Scroll Reveals)
+       4. Scroll Reveals
        ========================================= */
     const revealElements = document.querySelectorAll('.reveal');
     const skillBars = document.querySelectorAll('.progress .bar');
 
-    const revealOnScroll = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                if (entry.target.classList.contains('skills-grid')) {
-                    skillBars.forEach(bar => {
-                        const width = bar.getAttribute('style').match(/--w:\s*(.*)/)[1];
-                        bar.style.width = width;
-                    });
+    if ('IntersectionObserver' in window) {
+        const revealOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if (entry.target.classList.contains('skills-grid')) {
+                        skillBars.forEach(bar => {
+                            const width = bar.getAttribute('style').match(/--w:\s*(.*)/)[1];
+                            if(width) bar.style.width = width;
+                        });
+                    }
+                    observer.unobserve(entry.target); 
                 }
-                observer.unobserve(entry.target); 
-            }
-        });
-    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
-    revealElements.forEach(el => revealOnScroll.observe(el));
+        revealElements.forEach(el => revealOnScroll.observe(el));
+    }
 
     /* =========================================
        5. Hero Typewriter Effect
        ========================================= */
     const typeText = ["System Analyst", "Project Manager", "Software Engineer"];
     const typeElement = document.getElementById('typewriter');
-    let textIndex = 0, charIndex = 0, isDeleting = false;
+    
+    if (typeElement) {
+        let textIndex = 0, charIndex = 0, isDeleting = false;
+        function type() {
+            const currentString = typeText[textIndex];
+            
+            if (isDeleting) {
+                typeElement.textContent = currentString.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeElement.textContent = currentString.substring(0, charIndex + 1);
+                charIndex++;
+            }
 
-    function type() {
-        if(!typeElement) return;
-        const currentString = typeText[textIndex];
-        
-        if (isDeleting) {
-            typeElement.textContent = currentString.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            typeElement.textContent = currentString.substring(0, charIndex + 1);
-            charIndex++;
+            let speed = isDeleting ? 40 : 120;
+            if (!isDeleting && charIndex === currentString.length) {
+                speed = 2000; isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % typeText.length;
+                speed = 400; 
+            }
+            setTimeout(type, speed);
         }
-
-        let speed = isDeleting ? 40 : 120;
-        if (!isDeleting && charIndex === currentString.length) {
-            speed = 2000; isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            textIndex = (textIndex + 1) % typeText.length;
-            speed = 400; 
-        }
-        setTimeout(type, speed);
+        setTimeout(type, 1000);
     }
-    setTimeout(type, 1000);
 
     /* =========================================
        6. 3D Tilt Cards
@@ -258,8 +280,10 @@ document.addEventListener('DOMContentLoaded', () => {
             timeOffset += (note.d * 1000) + 50; 
         });
         
-        globalVisualizer.classList.remove('inactive');
-        setTimeout(() => { globalVisualizer.classList.add('inactive'); }, timeOffset);
+        if (globalVisualizer) {
+            globalVisualizer.classList.remove('inactive');
+            setTimeout(() => { globalVisualizer.classList.add('inactive'); }, timeOffset);
+        }
     }
 
     musicNodes.forEach(node => {
@@ -271,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================================
-       9. System Override Mini-Game
+       9. System Override Mini-Game (Bulletproof)
        ========================================= */
     const initGameBtn = document.getElementById('init-game');
     const closeGameBtn = document.getElementById('close-game');
@@ -283,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0, timeLeft = 15.0, gameInterval, spawnInterval;
 
     function spawnPacket() {
-        if(score >= 10 || timeLeft <= 0) return;
+        if(score >= 10 || timeLeft <= 0 || !gameArena) return;
 
         const packet = document.createElement('div');
         packet.classList.add('data-packet');
@@ -297,7 +321,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         packet.addEventListener('click', () => {
-            score++; scoreDisplay.textContent = score;
+            score++; 
+            if(scoreDisplay) scoreDisplay.textContent = score;
             playUIBeep(1200, 'sine', 0.1, 0.05); 
             packet.remove();
             if(score >= 10) endGame(true);
@@ -307,55 +332,58 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => { if(gameArena.contains(packet)) packet.remove(); }, 1500);
     }
 
-    function startGame() {
-        initAudio();
-        score = 0; timeLeft = 15.0; scoreDisplay.textContent = score;
-        gameLayer.classList.remove('hidden');
-        gameArena.innerHTML = ''; 
-        playUIBeep(100, 'sawtooth', 0.5, 0.1);
-
-        // Lower background music volume while playing
-        if(bgMusic) bgMusic.volume = 0.1;
-
-        gameInterval = setInterval(() => {
-            timeLeft -= 0.1;
-            timerDisplay.textContent = `Time remaining: ${timeLeft.toFixed(1)}s`;
-            if(timeLeft <= 0) endGame(false);
-        }, 100);
-
-        spawnInterval = setInterval(spawnPacket, 800);
-    }
-
     function endGame(win) {
         clearInterval(gameInterval); clearInterval(spawnInterval);
-        gameArena.innerHTML = '';
-        
-        // Restore background music volume
+        if(gameArena) gameArena.innerHTML = '';
         if(bgMusic) bgMusic.volume = 0.4;
         
         if(win) {
-            timerDisplay.innerHTML = '<span style="color:var(--accent-glow)">SYSTEM SECURED. YOU HAVE ADMINISTRATIVE ACCESS.</span>';
+            if(timerDisplay) timerDisplay.innerHTML = '<span style="color:var(--accent-glow)">SYSTEM SECURED. YOU HAVE ADMINISTRATIVE ACCESS.</span>';
             playUIBeep(800, 'sine', 0.1); setTimeout(() => playUIBeep(1200, 'sine', 0.3), 100);
         } else {
-            timerDisplay.innerHTML = '<span style="color:red">SYSTEM FAILURE. CONNECTION LOST.</span>';
+            if(timerDisplay) timerDisplay.innerHTML = '<span style="color:red">SYSTEM FAILURE. CONNECTION LOST.</span>';
             playUIBeep(200, 'sawtooth', 0.5);
         }
     }
 
-    // Abort Logic
     function abortGame() {
         clearInterval(gameInterval); clearInterval(spawnInterval);
-        gameLayer.classList.add('hidden');
+        if(gameLayer) gameLayer.classList.add('hidden');
         if(bgMusic) bgMusic.volume = 0.4;
     }
 
-    initGameBtn.addEventListener('click', startGame);
-    closeGameBtn.addEventListener('click', abortGame);
+    if (initGameBtn && gameLayer) {
+        initGameBtn.addEventListener('click', () => {
+            initAudio();
+            score = 0; timeLeft = 15.0; 
+            if(scoreDisplay) scoreDisplay.textContent = score;
+            gameLayer.classList.remove('hidden');
+            if(gameArena) gameArena.innerHTML = ''; 
+            playUIBeep(100, 'sawtooth', 0.5, 0.1);
+
+            if(bgMusic) bgMusic.volume = 0.1;
+
+            gameInterval = setInterval(() => {
+                timeLeft -= 0.1;
+                if(timerDisplay) timerDisplay.textContent = `Time remaining: ${timeLeft.toFixed(1)}s`;
+                if(timeLeft <= 0) endGame(false);
+            }, 100);
+
+            spawnInterval = setInterval(spawnPacket, 800);
+        });
+    }
+
+    if (closeGameBtn) {
+        closeGameBtn.addEventListener('click', abortGame);
+    }
     
-    // Allow pressing ESC key to close the game
+    // Safety ESC key listener
     document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape' && !gameLayer.classList.contains('hidden')) {
-            abortGame();
+        if(e.key === 'Escape') {
+            if(gameLayer && !gameLayer.classList.contains('hidden')) {
+                abortGame();
+            }
         }
     });
+
 });
