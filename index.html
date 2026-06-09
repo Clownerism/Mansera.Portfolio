@@ -14,9 +14,20 @@
 <body>
     <div class="cyber-cursor"></div>
     <div class="cyber-cursor-follower"></div>
-
     <div class="cyber-grid"></div>
     <div class="scanlines"></div>
+    
+    <div id="cinematic-overlay"></div>
+
+    <div id="game-layer" class="hidden">
+        <div class="game-ui">
+            <h3>System Override Initiated</h3>
+            <p>Catch the Rogue Data Packets: <span id="game-score">0</span> / 10</p>
+            <p class="mono-subtext text-muted" id="game-timer">Time remaining: 15.0s</p>
+            <button id="close-game" class="btn btn-secondary mt-3">Abort Sequence</button>
+        </div>
+        <div id="game-arena"></div>
+    </div>
 
     <nav class="glass-nav">
         <div class="nav-content container">
@@ -55,170 +66,65 @@
         </div>
     </header>
 
-    <section id="about" class="about section container">
-        <div class="section-header reveal">
-            <h2>01. <span class="accent">Identity Matrix</span></h2>
-            <div class="line"></div>
-        </div>
-        <div class="about-grid reveal">
-            <div class="about-text glass-panel hover-glow">
-                <p>I am a 3rd-year BSIT student driven by the logic of systems and the art of design. My focus lies at the intersection of robust backend architecture and intuitive user interfaces.</p>
-                <br>
-                <p>Beyond writing code, I specialize in comprehensive technical documentation—crafting precise Use Case Diagrams, ERDs, and DFDs to ensure system integrity before a single line of code is compiled.</p>
-            </div>
-            <div class="competency-list">
-                <div class="comp-item glass-panel magnetic-element play-sound">
-                    <span class="mono-subtext accent">// Core</span>
-                    <h3>Systems Analysis</h3>
-                </div>
-                <div class="comp-item glass-panel magnetic-element play-sound">
-                    <span class="mono-subtext accent">// Leadership</span>
-                    <h3>Project Management</h3>
-                </div>
-                <div class="comp-item glass-panel magnetic-element play-sound">
-                    <span class="mono-subtext accent">// Research</span>
-                    <h3>Image Processing Integration</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="skills section container">
-        <div class="section-header reveal">
-            <h2>02. <span class="accent">Tech Arsenal & Certs</span></h2>
-            <div class="line"></div>
-        </div>
-        
-        <div class="cert-banner glass-panel reveal mb-2 hover-glow">
-            <span class="mono-subtext accent">Verified Credentials:</span>
-            <span>🏆 Cisco CCNA: Introduction to Networks</span> | 
-            <span>🏆 Cisco CCNA: Switching, Routing, Wireless</span> |
-            <span>🤖 UM Robotics Camp</span>
-        </div>
-
-        <div class="skills-grid reveal">
-            <div class="skill-badge glass-panel hover-glow">
-                <div class="skill-header">
-                    <span>Web & Core</span>
-                    <span class="mono-subtext accent">UI/UX</span>
-                </div>
-                <p class="mono-subtext text-muted mb-2">HTML5, CSS3, JS</p>
-                <div class="progress"><div class="bar" style="--w: 95%"></div></div>
-            </div>
-
-            <div class="skill-badge glass-panel hover-glow">
-                <div class="skill-header">
-                    <span>Backend Logic</span>
-                    <span class="mono-subtext accent">Server</span>
-                </div>
-                <p class="mono-subtext text-muted mb-2">PHP, Laravel</p>
-                <div class="progress"><div class="bar" style="--w: 85%"></div></div>
-            </div>
-
-            <div class="skill-badge glass-panel hover-glow">
-                <div class="skill-header">
-                    <span>Native Mobile</span>
-                    <span class="mono-subtext accent">App</span>
-                </div>
-                <p class="mono-subtext text-muted mb-2">Dart, Flutter, Swift, Kotlin</p>
-                <div class="progress"><div class="bar" style="--w: 80%"></div></div>
-            </div>
-
-            <div class="skill-badge glass-panel hover-glow">
-                <div class="skill-header">
-                    <span>Systems & Compute</span>
-                    <span class="mono-subtext accent">OOP</span>
-                </div>
-                <p class="mono-subtext text-muted mb-2">Java, C++, C#, Python</p>
-                <div class="progress"><div class="bar" style="--w: 75%"></div></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="projects section container">
-        <div class="section-header reveal">
-            <h2>03. <span class="accent">Deployed Architecture</span></h2>
-            <div class="line"></div>
-        </div>
-        <div class="project-grid">
-            
-            <article class="project-card glass-panel reveal tilt-card play-sound">
-                <div class="project-content">
-                    <span class="mono-subtext accent animate-pulse">● Live Simulation (Capstone)</span>
-                    <h3 class="project-title">WharfIntel</h3>
-                    <div class="project-desc glass-inset">
-                        <p>Spearheading a real-time maritime logistics simulation platform. Acting as Project Manager and Systems Analyst, orchestrating the architecture alongside Gabriel C. Rusiana (Programmer) and John Wyne A. Tumabiling (Documentarian).</p>
-                    </div>
-                    <ul class="tech-stack mono-subtext">
-                        <li>Logistics Flow</li>
-                        <li>Gantt Lifecycle</li>
-                        <li>Simulation UI</li>
-                    </ul>
-                </div>
-            </article>
-
-            <article class="project-card glass-panel reveal tilt-card play-sound">
-                <div class="project-content">
-                    <span class="mono-subtext accent">Startup Initiative</span>
-                    <h3 class="project-title">Fabric Grid: TexMap</h3>
-                    <div class="project-desc glass-inset">
-                        <p>A GIS-driven platform pioneering the circular economy in the garment industry. Engineered to facilitate localized tailoring services, sustainable event wear discovery, and peer-to-peer uniform exchange.</p>
-                    </div>
-                    <ul class="tech-stack mono-subtext">
-                        <li>GIS Mapping</li>
-                        <li>Circular Marketplace</li>
-                        <li>Sustainability</li>
-                    </ul>
-                </div>
-            </article>
-
-            <article class="project-card glass-panel reveal tilt-card play-sound">
-                <div class="project-content">
-                    <span class="mono-subtext accent">Backend Integration</span>
-                    <h3 class="project-title">The Level App</h3>
-                    <div class="project-desc glass-inset">
-                        <p>A complex application focusing on deep backend logic and data routing. This project served as a crucible for mastering database relationships, API endpoints, and secure data handling.</p>
-                    </div>
-                    <ul class="tech-stack mono-subtext">
-                        <li>Database Mgmt</li>
-                        <li>Server Logic</li>
-                        <li>Security Arch</li>
-                    </ul>
-                </div>
-            </article>
-
-        </div>
-    </section>
-
     <section id="persona" class="persona section container">
         <div class="section-header reveal">
             <h2>04. <span class="accent">The Human Node</span></h2>
             <div class="line"></div>
         </div>
+        
+        <p class="mono-subtext text-muted mb-2 reveal">> Compiling creative variables and UX influences...</p>
+
         <div class="persona-grid reveal">
             
-            <div class="persona-card glass-panel hover-glow">
-                <div class="card-icon">🎵</div>
-                <h3>Audio Frequencies</h3>
-                <p class="text-muted">Code requires a soundtrack. I draw creative energy from an eclectic mix of music that drives my workflow and fuels my unorthodox design approach.</p>
-                <div class="audio-visualizer">
+            <div class="persona-card glass-panel hover-glow span-2">
+                <div class="card-header">
+                    <div class="card-icon">🎧</div>
+                    <h3>Discography Matrix</h3>
+                </div>
+                <p class="text-muted mb-2">Auditory inspiration drives my coding rhythm. Click nodes to initialize generative synth sequences.</p>
+                
+                <div class="music-nodes">
+                    <button class="music-node kpop-node play-sequence" data-artist="aespa">
+                        <span class="node-ring"></span> aespa
+                    </button>
+                    <button class="music-node kpop-node play-sequence" data-artist="ive">
+                        <span class="node-ring"></span> IVE
+                    </button>
+                    <button class="music-node kpop-node play-sequence" data-artist="txt">
+                        <span class="node-ring"></span> TXT
+                    </button>
+                    <button class="music-node kpop-node play-sequence" data-artist="treasure">
+                        <span class="node-ring"></span> TREASURE
+                    </button>
+                </div>
+                
+                <div class="audio-visualizer inactive" id="global-visualizer">
                     <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                    <div class="bar"></div><div class="bar"></div>
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
                 </div>
             </div>
 
-            <div class="persona-card glass-panel hover-glow">
-                <div class="card-icon">🎮</div>
-                <h3>Interactive Worlds</h3>
-                <p class="text-muted">Gaming isn't just a pastime; it's a study in UI/UX, player psychology, and immersive digital environments that influence my software design.</p>
-                <div class="pixel-grid"></div>
-            </div>
-
-            <div class="persona-card glass-panel hover-glow">
-                <div class="card-icon">🎬</div>
-                <h3>Cinematic Logic</h3>
-                <p class="text-muted">A profound appreciation for storytelling and cinematography. A great application, much like a great film, requires perfect pacing and visual hierarchy.</p>
-                <div class="film-strip"></div>
+            <div class="persona-card glass-panel hover-glow span-2">
+                <div class="card-header">
+                    <div class="card-icon">🎬</div>
+                    <h3>Cinematic UX Studies</h3>
+                </div>
+                <p class="text-muted mb-2">Studying tension, pacing, and visual hierarchy through film. Hover to test environment reactions.</p>
+                
+                <div class="movie-vault">
+                    <div class="movie-card horror-hover" data-effect="from">
+                        <h4>FROM</h4>
+                        <span class="mono-subtext">Sci-Fi / Horror</span>
+                    </div>
+                    <div class="movie-card horror-hover" data-effect="abigail">
+                        <h4>Abigail</h4>
+                        <span class="mono-subtext">Vampire / Thriller</span>
+                    </div>
+                    <div class="movie-card horror-hover" data-effect="incantation">
+                        <h4>Incantation</h4>
+                        <span class="mono-subtext">Found Footage / Cult</span>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -228,7 +134,11 @@
         <div class="container footer-content reveal">
             <h2 class="contact-title glitch-text" data-text="Awaiting Connection...">Awaiting Connection...</h2>
             <p class="mono-subtext text-muted mb-2">Ready to architect the next system?</p>
-            <a href="mailto:mansera.johnphillip@dnsc.edu.ph" class="btn btn-primary glow-effect play-sound" data-freq="900">Transmit Message</a>
+            
+            <div class="footer-actions mt-3">
+                <a href="mailto:mansera.johnphillip@dnsc.edu.ph" class="btn btn-primary glow-effect play-sound" data-freq="900">Transmit Message</a>
+                <button id="init-game" class="btn btn-secondary glass-panel play-sound">Run Diagnostics (Mini-Game)</button>
+            </div>
             
             <p class="mono-subtext text-muted mt-3 copyright">
                 Designed & Engineered by John Phillip © <span id="year"></span>
