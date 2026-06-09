@@ -3,7 +3,85 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('year').textContent = new Date().getFullYear();
 
     /* =========================================
-       1. Custom Cursor Logic
+       0. Boot Sequence & Background Music
+       ========================================= */
+    const bootBtn = document.getElementById('boot-btn');
+    const bootScreen = document.getElementById('boot-screen');
+    const bgMusic = document.getElementById('bg-music');
+
+    bootBtn.addEventListener('click', () => {
+        // This click fulfills the browser requirement to play audio
+        bgMusic.volume = 0.4; // Set a reasonable background volume
+        bgMusic.play().catch(e => console.log("Audio play blocked by browser settings."));
+        
+        bootScreen.style.opacity = '0';
+        setTimeout(() => { bootScreen.remove(); }, 1000);
+        
+        // Init UI Audio context simultaneously
+        initAudio();
+    });
+
+    /* =========================================
+       1. HTML5 Canvas Particle Background Engine
+       ========================================= */
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particlesArray;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
+            this.color = Math.random() > 0.5 ? 'rgba(0, 255, 204, 0.4)' : 'rgba(255, 0, 255, 0.2)';
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            // Wrap around edges
+            if (this.x > canvas.width) this.x = 0;
+            else if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            else if (this.y < 0) this.y = canvas.height;
+        }
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        particlesArray = [];
+        let numberOfParticles = (canvas.width * canvas.height) / 10000; // Density
+        for (let i = 0; i < numberOfParticles; i++) {
+            particlesArray.push(new Particle());
+        }
+    }
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+            particlesArray[i].draw();
+        }
+        requestAnimationFrame(animateParticles);
+    }
+    initParticles();
+    animateParticles();
+
+    /* =========================================
+       2. Custom Cursor Logic
        ========================================= */
     const cursor = document.querySelector('.cyber-cursor');
     const follower = document.querySelector('.cyber-cursor-follower');
@@ -31,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================================
-       2. Web Audio Synthesizer Engine
+       3. Web Audio Synthesizer Engine (UI Sounds)
        ========================================= */
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     let audioCtx;
@@ -40,9 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!audioCtx) audioCtx = new AudioContext();
         if (audioCtx.state === 'suspended') audioCtx.resume();
     }
-
-    // Initialize audio safely via user interaction
-    document.body.addEventListener('click', initAudio, { once: true });
 
     function playUIBeep(frequency = 440, type = 'sine', duration = 0.05, vol = 0.05) {
         if (!audioCtx || audioCtx.state !== 'running') return;
@@ -57,9 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gainNode.gain.setValueAtTime(vol, audioCtx.currentTime);
             gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
             oscillator.stop(audioCtx.currentTime + duration);
-        } catch (e) {
-            console.log("Audio exception handled.");
-        }
+        } catch (e) { }
     }
 
     const soundElements = document.querySelectorAll('.play-sound');
@@ -71,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================================
-       3. Intersection Observers (Scroll Reveals)
+       4. Intersection Observers (Scroll Reveals)
        ========================================= */
     const revealElements = document.querySelectorAll('.reveal');
     const skillBars = document.querySelectorAll('.progress .bar');
@@ -94,9 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => revealOnScroll.observe(el));
 
     /* =========================================
-       4. Hero Typewriter Effect
+       5. Hero Typewriter Effect
        ========================================= */
-    const typeText = ["System Analyst", "Project Manager", "Creative Architect"];
+    const typeText = ["System Analyst", "Project Manager", "Software Engineer"];
     const typeElement = document.getElementById('typewriter');
     let textIndex = 0, charIndex = 0, isDeleting = false;
 
@@ -125,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(type, 1000);
 
     /* =========================================
-       5. 3D Tilt Cards
+       6. 3D Tilt Cards
        ========================================= */
     const tiltCards = document.querySelectorAll('.tilt-card');
     tiltCards.forEach(card => {
@@ -145,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================================
-       6. Cinematic Horror Overlays
+       7. Cinematic Horror Overlays
        ========================================= */
     const movieCards = document.querySelectorAll('.movie-card');
     movieCards.forEach(card => {
@@ -162,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================================
-       7. Discography Matrix Audio
+       8. Discography Matrix Audio
        ========================================= */
     const musicNodes = document.querySelectorAll('.music-node');
     const globalVisualizer = document.getElementById('global-visualizer');
@@ -175,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function playSequence(artist) {
-        initAudio(); // Ensure context is running
+        initAudio(); 
         const seq = sequences[artist];
         if(!seq) return;
         
@@ -198,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================================
-       8. System Override Mini-Game
+       9. System Override Mini-Game
        ========================================= */
     const initGameBtn = document.getElementById('init-game');
     const closeGameBtn = document.getElementById('close-game');
@@ -216,7 +289,6 @@ document.addEventListener('DOMContentLoaded', () => {
         packet.classList.add('data-packet');
         packet.innerHTML = '&lt;/&gt;';
         
-        // Wait for DOM layout to ensure correct dimensions
         requestAnimationFrame(() => {
             const maxX = Math.max(gameArena.clientWidth - 40, 10);
             const maxY = Math.max(gameArena.clientHeight - 40, 10);
@@ -242,6 +314,9 @@ document.addEventListener('DOMContentLoaded', () => {
         gameArena.innerHTML = ''; 
         playUIBeep(100, 'sawtooth', 0.5, 0.1);
 
+        // Lower background music volume while playing
+        if(bgMusic) bgMusic.volume = 0.1;
+
         gameInterval = setInterval(() => {
             timeLeft -= 0.1;
             timerDisplay.textContent = `Time remaining: ${timeLeft.toFixed(1)}s`;
@@ -255,6 +330,9 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(gameInterval); clearInterval(spawnInterval);
         gameArena.innerHTML = '';
         
+        // Restore background music volume
+        if(bgMusic) bgMusic.volume = 0.4;
+        
         if(win) {
             timerDisplay.innerHTML = '<span style="color:var(--accent-glow)">SYSTEM SECURED. YOU HAVE ADMINISTRATIVE ACCESS.</span>';
             playUIBeep(800, 'sine', 0.1); setTimeout(() => playUIBeep(1200, 'sine', 0.3), 100);
@@ -264,9 +342,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    initGameBtn.addEventListener('click', startGame);
-    closeGameBtn.addEventListener('click', () => {
+    // Abort Logic
+    function abortGame() {
         clearInterval(gameInterval); clearInterval(spawnInterval);
         gameLayer.classList.add('hidden');
+        if(bgMusic) bgMusic.volume = 0.4;
+    }
+
+    initGameBtn.addEventListener('click', startGame);
+    closeGameBtn.addEventListener('click', abortGame);
+    
+    // Allow pressing ESC key to close the game
+    document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && !gameLayer.classList.contains('hidden')) {
+            abortGame();
+        }
     });
 });
