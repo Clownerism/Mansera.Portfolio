@@ -26,13 +26,18 @@ h1, h2, h3 { font-weight: 800; line-height: 1.2; }
 .mb-2 { margin-bottom: 2rem; }
 .mt-3 { margin-top: 3rem; }
 
+/* Boot Screen Overlay */
+#boot-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg-base); z-index: 10000; display: flex; justify-content: center; align-items: center; text-align: center; transition: opacity 1s ease; }
+.boot-content h2 { font-family: var(--font-code); font-size: 2.5rem; color: var(--accent-secondary); margin-bottom: 2rem; letter-spacing: 5px; }
+
 /* Global Cursor */
 .cyber-cursor { width: 8px; height: 8px; background: var(--accent-glow); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s; mix-blend-mode: difference; }
 .cyber-cursor-follower { width: 30px; height: 30px; border: 1px solid var(--accent-secondary); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: 0.1s ease-out; }
 .cursor-hover .cyber-cursor { width: 40px; height: 40px; background: rgba(0, 255, 204, 0.2); }
 .cursor-hover .cyber-cursor-follower { width: 60px; height: 60px; border-color: var(--accent-glow); transform: translate(-50%, -50%) rotate(45deg); border-radius: 4px; }
 
-/* Background Overlays */
+/* Backgrounds & Canvas Particles */
+#particle-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; pointer-events: none; }
 .cyber-grid { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px); background-size: 50px 50px; z-index: -2; transform: perspective(1000px) rotateX(60deg) translateY(-100px) translateZ(-200px); animation: gridMove 15s linear infinite; }
 @keyframes gridMove { 100% { transform: perspective(1000px) rotateX(60deg) translateY(50px) translateZ(-200px); } }
 .scanlines { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2)); background-size: 100% 4px; z-index: -1; pointer-events: none; opacity: 0.6; }
@@ -58,11 +63,14 @@ h1, h2, h3 { font-weight: 800; line-height: 1.2; }
 .nav-links { display: flex; list-style: none; gap: 2rem; }
 .nav-links a { color: var(--text-primary); text-decoration: none; font-size: 0.9rem; transition: color var(--transition-fast); }
 .nav-links a:hover { color: var(--accent-glow); }
-.btn { display: inline-block; padding: 0.8rem 2rem; font-family: var(--font-code); text-decoration: none; border-radius: 2px; transition: 0.3s; position: relative; overflow: hidden; }
-.btn-primary { border: 1px solid var(--accent-glow); color: var(--accent-glow); }
-.btn-primary:hover { background: rgba(0, 255, 204, 0.1); box-shadow: 0 0 15px var(--accent-glow); }
+
+.btn { display: inline-block; padding: 0.8rem 2rem; font-family: var(--font-code); font-weight: bold; text-decoration: none; border-radius: 2px; transition: 0.3s; position: relative; overflow: hidden; }
+.btn-primary { border: 1px solid var(--accent-glow); color: var(--accent-glow); background: rgba(0, 255, 204, 0.05); }
+.btn-primary:hover { background: rgba(0, 255, 204, 0.2); box-shadow: 0 0 20px var(--accent-glow); }
 .btn-secondary { color: var(--text-primary); border: 1px solid var(--text-secondary); background: transparent; }
-.btn-secondary:hover { border-color: var(--text-primary); }
+.btn-secondary:hover { border-color: var(--accent-secondary); color: var(--accent-secondary); }
+.btn-danger { background: #ff003c; color: white; border: 1px solid #ff003c; }
+.btn-danger:hover { background: #aa0028; box-shadow: 0 0 20px rgba(255, 0, 60, 0.5); }
 
 /* Hero */
 .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
@@ -92,6 +100,7 @@ h1, h2, h3 { font-weight: 800; line-height: 1.2; }
 .progress { width: 100%; height: 2px; background: rgba(255,255,255,0.1); }
 .progress .bar { height: 100%; width: 0; background: var(--accent-glow); box-shadow: 0 0 8px var(--accent-glow); transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .project-card { padding: 3rem; }
+.project-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
 
 /* Persona / Interactions */
 .persona-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
@@ -133,7 +142,8 @@ body.effect-incantation .movie-card h4 { animation: glitch-anim 0.2s infinite; c
 /* Mini-Game Layer */
 #game-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(10px); z-index: 9999; display: flex; flex-direction: column; opacity: 1; transition: opacity 0.3s; }
 #game-layer.hidden { opacity: 0; pointer-events: none; }
-.game-ui { text-align: center; padding: 2rem; border-bottom: 1px solid var(--accent-secondary); }
+#close-game { position: absolute; top: 20px; right: 20px; z-index: 10000; box-shadow: 0 0 15px rgba(255, 0, 60, 0.5); }
+.game-ui { text-align: center; padding: 3rem 2rem 2rem; border-bottom: 1px solid var(--accent-secondary); }
 .game-ui h3 { color: var(--accent-secondary); font-family: var(--font-code); font-size: 2rem; text-transform: uppercase; letter-spacing: 2px; }
 #game-arena { flex-grow: 1; position: relative; overflow: hidden; }
 .data-packet { position: absolute; width: 40px; height: 40px; background: var(--accent-glow); border-radius: 4px; box-shadow: 0 0 20px var(--accent-glow); display: flex; justify-content: center; align-items: center; font-family: var(--font-code); color: #000; font-weight: bold; font-size: 0.8rem; cursor: crosshair !important; animation: rotate-packet 2s linear infinite; }
@@ -152,6 +162,7 @@ body.effect-incantation .movie-card h4 { animation: glitch-anim 0.2s infinite; c
     .tech-ring { width: 230px; height: 230px; top: -15px; left: -15px; }
     .hero-actions { justify-content: center; }
     .about-grid { grid-template-columns: 1fr; }
+    .project-split { grid-template-columns: 1fr; }
     .nav-links { display: none; }
     .cert-banner { flex-direction: column; text-align: center; gap: 1rem; }
 }
