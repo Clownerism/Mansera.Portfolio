@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Phillip C. Mansera | IT Portfolio</title>
+    <title>John Phillip C. Mansera | Systems & Architecture</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,16 +12,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="cyber-cursor"></div>
+    <div class="cyber-cursor-follower"></div>
+
     <div class="cyber-grid"></div>
+    <div class="scanlines"></div>
 
     <nav class="glass-nav">
         <div class="nav-content container">
-            <div class="logo">SYS<span class="accent">.ADMIN</span></div>
+            <div class="logo play-sound" data-freq="800">SYS<span class="accent">.ADMIN</span></div>
             <ul class="nav-links">
-                <li><a href="#about" class="magnetic-link">Identity</a></li>
-                <li><a href="#skills" class="magnetic-link">Stack</a></li>
-                <li><a href="#certs" class="magnetic-link">Credentials</a></li>
-                <li><a href="#projects" class="magnetic-link">Architecture</a></li>
+                <li><a href="#about" class="magnetic-link play-sound">Identity</a></li>
+                <li><a href="#skills" class="magnetic-link play-sound">Stack</a></li>
+                <li><a href="#projects" class="magnetic-link play-sound">Architecture</a></li>
+                <li><a href="#persona" class="magnetic-link play-sound">Persona</a></li>
             </ul>
         </div>
     </nav>
@@ -31,20 +35,21 @@
             <div class="hero-image-wrapper reveal">
                 <img src="profile.jpg" alt="John Phillip Mansera" class="profile-img">
                 <div class="image-glow"></div>
+                <div class="tech-ring"></div>
             </div>
             
             <div class="hero-content reveal">
-                <p class="mono-subtext accent">Initialization complete...</p>
+                <p class="mono-subtext accent glitch-text" data-text="System booted...">System booted...</p>
                 <h1 class="hero-title">
                     John Phillip<br>
                     <span class="typewriter-text" id="typewriter"></span><span class="cursor">|</span>
                 </h1>
                 <p class="hero-desc">
-                    Engineering resilient digital infrastructure. Specializing in systems analysis, technical project management, and high-performance development.
+                    Engineering resilient digital infrastructure. Bridging the gap between rigid backend logic and fluid user experiences.
                 </p>
                 <div class="hero-actions">
-                    <a href="#projects" class="btn btn-primary glow-effect">Deploy Architecture</a>
-                    <a href="mailto:mansera.johnphillip@dnsc.edu.ph" class="btn btn-secondary glass-panel">Initialize Contact</a>
+                    <a href="#projects" class="btn btn-primary glow-effect play-sound" data-freq="600">Initialize Projects</a>
+                    <a href="mailto:mansera.johnphillip@dnsc.edu.ph" class="btn btn-secondary glass-panel play-sound">Ping Network</a>
                 </div>
             </div>
         </div>
@@ -56,23 +61,23 @@
             <div class="line"></div>
         </div>
         <div class="about-grid reveal">
-            <div class="about-text glass-panel">
+            <div class="about-text glass-panel hover-glow">
                 <p>I am a 3rd-year BSIT student driven by the logic of systems and the art of design. My focus lies at the intersection of robust backend architecture and intuitive user interfaces.</p>
                 <br>
-                <p>When I'm not architecting databases or managing project lifecycles like WharfIntel, I'm analyzing system vulnerabilities and optimizing data flows for maximum efficiency.</p>
+                <p>Beyond writing code, I specialize in comprehensive technical documentation—crafting precise Use Case Diagrams, ERDs, and DFDs to ensure system integrity before a single line of code is compiled.</p>
             </div>
             <div class="competency-list">
-                <div class="comp-item glass-panel magnetic-element">
-                    <span class="mono-subtext accent">// 01</span>
+                <div class="comp-item glass-panel magnetic-element play-sound">
+                    <span class="mono-subtext accent">// Core</span>
                     <h3>Systems Analysis</h3>
                 </div>
-                <div class="comp-item glass-panel magnetic-element">
-                    <span class="mono-subtext accent">// 02</span>
+                <div class="comp-item glass-panel magnetic-element play-sound">
+                    <span class="mono-subtext accent">// Leadership</span>
                     <h3>Project Management</h3>
                 </div>
-                <div class="comp-item glass-panel magnetic-element">
-                    <span class="mono-subtext accent">// 03</span>
-                    <h3>Cross-Platform Dev</h3>
+                <div class="comp-item glass-panel magnetic-element play-sound">
+                    <span class="mono-subtext accent">// Research</span>
+                    <h3>Image Processing Integration</h3>
                 </div>
             </div>
         </div>
@@ -80,132 +85,104 @@
 
     <section id="skills" class="skills section container">
         <div class="section-header reveal">
-            <h2>02. <span class="accent">Expanded Tech Arsenal</span></h2>
+            <h2>02. <span class="accent">Tech Arsenal & Certs</span></h2>
             <div class="line"></div>
         </div>
+        
+        <div class="cert-banner glass-panel reveal mb-2 hover-glow">
+            <span class="mono-subtext accent">Verified Credentials:</span>
+            <span>🏆 Cisco CCNA: Introduction to Networks</span> | 
+            <span>🏆 Cisco CCNA: Switching, Routing, Wireless</span> |
+            <span>🤖 UM Robotics Camp</span>
+        </div>
+
         <div class="skills-grid reveal">
-            <div class="skill-badge glass-panel">
+            <div class="skill-badge glass-panel hover-glow">
                 <div class="skill-header">
-                    <span>Web Fundamentals</span>
-                    <span class="mono-subtext accent">Core</span>
+                    <span>Web & Core</span>
+                    <span class="mono-subtext accent">UI/UX</span>
                 </div>
-                <p class="mono-subtext text-muted mb-2">HTML5, CSS3, JavaScript</p>
+                <p class="mono-subtext text-muted mb-2">HTML5, CSS3, JS</p>
                 <div class="progress"><div class="bar" style="--w: 95%"></div></div>
             </div>
 
-            <div class="skill-badge glass-panel">
+            <div class="skill-badge glass-panel hover-glow">
                 <div class="skill-header">
-                    <span>Backend & Frameworks</span>
-                    <span class="mono-subtext accent">Logic</span>
+                    <span>Backend Logic</span>
+                    <span class="mono-subtext accent">Server</span>
                 </div>
                 <p class="mono-subtext text-muted mb-2">PHP, Laravel</p>
                 <div class="progress"><div class="bar" style="--w: 85%"></div></div>
             </div>
 
-            <div class="skill-badge glass-panel">
+            <div class="skill-badge glass-panel hover-glow">
                 <div class="skill-header">
-                    <span>Mobile & App Dev</span>
-                    <span class="mono-subtext accent">Native</span>
+                    <span>Native Mobile</span>
+                    <span class="mono-subtext accent">App</span>
                 </div>
                 <p class="mono-subtext text-muted mb-2">Dart, Flutter, Swift, Kotlin</p>
                 <div class="progress"><div class="bar" style="--w: 80%"></div></div>
             </div>
 
-            <div class="skill-badge glass-panel">
+            <div class="skill-badge glass-panel hover-glow">
                 <div class="skill-header">
-                    <span>Object-Oriented & Systems</span>
-                    <span class="mono-subtext accent">Compute</span>
+                    <span>Systems & Compute</span>
+                    <span class="mono-subtext accent">OOP</span>
                 </div>
                 <p class="mono-subtext text-muted mb-2">Java, C++, C#, Python</p>
                 <div class="progress"><div class="bar" style="--w: 75%"></div></div>
-            </div>
-
-            <div class="skill-badge glass-panel">
-                <div class="skill-header">
-                    <span>Scripting & Alternative</span>
-                    <span class="mono-subtext accent">Agile</span>
-                </div>
-                <p class="mono-subtext text-muted mb-2">Ruby, Scala, Nim</p>
-                <div class="progress"><div class="bar" style="--w: 70%"></div></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="certs" class="certs section container">
-        <div class="section-header reveal">
-            <h2>03. <span class="accent">Credential Vault</span></h2>
-            <div class="line"></div>
-        </div>
-        <div class="cert-vault reveal">
-            <div class="cert-card glass-panel tilt-card">
-                <div class="cert-icon">🌐</div>
-                <h3>CCNA: Introduction to Networks</h3>
-                <p class="mono-subtext text-muted">Cisco Networking Academy</p>
-                <div class="cert-glow"></div>
-            </div>
-            <div class="cert-card glass-panel tilt-card">
-                <div class="cert-icon">🖧</div>
-                <h3>CCNA: Switching, Routing, and Wireless</h3>
-                <p class="mono-subtext text-muted">Cisco Networking Academy</p>
-                <div class="cert-glow"></div>
-            </div>
-            <div class="cert-card glass-panel tilt-card">
-                <div class="cert-icon">🤖</div>
-                <h3>Robotics Camp Certification</h3>
-                <p class="mono-subtext text-muted">University of Mindanao</p>
-                <div class="cert-glow"></div>
             </div>
         </div>
     </section>
 
     <section id="projects" class="projects section container">
         <div class="section-header reveal">
-            <h2>04. <span class="accent">Deployed Architecture</span></h2>
+            <h2>03. <span class="accent">Deployed Architecture</span></h2>
             <div class="line"></div>
         </div>
         <div class="project-grid">
             
-            <article class="project-card glass-panel reveal tilt-card">
+            <article class="project-card glass-panel reveal tilt-card play-sound">
                 <div class="project-content">
-                    <span class="mono-subtext accent">Ongoing Capstone</span>
+                    <span class="mono-subtext accent animate-pulse">● Live Simulation (Capstone)</span>
                     <h3 class="project-title">WharfIntel</h3>
                     <div class="project-desc glass-inset">
-                        <p>A comprehensive maritime logistics simulation platform. Designed to facilitate real-time interaction with complex logistics flows, built explicitly for maritime workers and academic simulation.</p>
+                        <p>Spearheading a real-time maritime logistics simulation platform. Acting as Project Manager and Systems Analyst, orchestrating the architecture alongside Gabriel C. Rusiana (Programmer) and John Wyne A. Tumabiling (Documentarian).</p>
                     </div>
                     <ul class="tech-stack mono-subtext">
-                        <li>System Analysis</li>
-                        <li>Project Management</li>
-                        <li>Simulation</li>
+                        <li>Logistics Flow</li>
+                        <li>Gantt Lifecycle</li>
+                        <li>Simulation UI</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="project-card glass-panel reveal tilt-card">
+            <article class="project-card glass-panel reveal tilt-card play-sound">
                 <div class="project-content">
-                    <span class="mono-subtext accent">Financial System</span>
-                    <h3 class="project-title">Transactopia</h3>
+                    <span class="mono-subtext accent">Startup Initiative</span>
+                    <h3 class="project-title">Fabric Grid: TexMap</h3>
                     <div class="project-desc glass-inset">
-                        <p>A high-grade financial management system engineered with six essential features: withdrawal, deposit, balance checking, loan management, fund transfer, and bill payment. Prioritized security and interface efficiency.</p>
+                        <p>A GIS-driven platform pioneering the circular economy in the garment industry. Engineered to facilitate localized tailoring services, sustainable event wear discovery, and peer-to-peer uniform exchange.</p>
                     </div>
                     <ul class="tech-stack mono-subtext">
-                        <li>Security Arch</li>
+                        <li>GIS Mapping</li>
+                        <li>Circular Marketplace</li>
+                        <li>Sustainability</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="project-card glass-panel reveal tilt-card play-sound">
+                <div class="project-content">
+                    <span class="mono-subtext accent">Backend Integration</span>
+                    <h3 class="project-title">The Level App</h3>
+                    <div class="project-desc glass-inset">
+                        <p>A complex application focusing on deep backend logic and data routing. This project served as a crucible for mastering database relationships, API endpoints, and secure data handling.</p>
+                    </div>
+                    <ul class="tech-stack mono-subtext">
                         <li>Database Mgmt</li>
-                        <li>UI/UX</li>
-                    </ul>
-                </div>
-            </article>
-
-            <article class="project-card glass-panel reveal tilt-card">
-                <div class="project-content">
-                    <span class="mono-subtext accent">Healthcare Logic</span>
-                    <h3 class="project-title">Doctor Appointment System</h3>
-                    <div class="project-desc glass-inset">
-                        <p>A scheduling application built to optimize medical clinic patient management with features including automated timely notifications and clear doctor availability tracking.</p>
-                    </div>
-                    <ul class="tech-stack mono-subtext">
-                        <li>Full-Stack</li>
-                        <li>Data Flow</li>
-                        <li>Scheduling Logic</li>
+                        <li>Server Logic</li>
+                        <li>Security Arch</li>
                     </ul>
                 </div>
             </article>
@@ -213,17 +190,53 @@
         </div>
     </section>
 
+    <section id="persona" class="persona section container">
+        <div class="section-header reveal">
+            <h2>04. <span class="accent">The Human Node</span></h2>
+            <div class="line"></div>
+        </div>
+        <div class="persona-grid reveal">
+            
+            <div class="persona-card glass-panel hover-glow">
+                <div class="card-icon">🎵</div>
+                <h3>Audio Frequencies</h3>
+                <p class="text-muted">Code requires a soundtrack. I draw creative energy from an eclectic mix of music that drives my workflow and fuels my unorthodox design approach.</p>
+                <div class="audio-visualizer">
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    <div class="bar"></div><div class="bar"></div>
+                </div>
+            </div>
+
+            <div class="persona-card glass-panel hover-glow">
+                <div class="card-icon">🎮</div>
+                <h3>Interactive Worlds</h3>
+                <p class="text-muted">Gaming isn't just a pastime; it's a study in UI/UX, player psychology, and immersive digital environments that influence my software design.</p>
+                <div class="pixel-grid"></div>
+            </div>
+
+            <div class="persona-card glass-panel hover-glow">
+                <div class="card-icon">🎬</div>
+                <h3>Cinematic Logic</h3>
+                <p class="text-muted">A profound appreciation for storytelling and cinematography. A great application, much like a great film, requires perfect pacing and visual hierarchy.</p>
+                <div class="film-strip"></div>
+            </div>
+
+        </div>
+    </section>
+
     <footer id="contact" class="footer glass-panel">
         <div class="container footer-content reveal">
-            <h2 class="contact-title">Awaiting Connection...</h2>
+            <h2 class="contact-title glitch-text" data-text="Awaiting Connection...">Awaiting Connection...</h2>
             <p class="mono-subtext text-muted mb-2">Ready to architect the next system?</p>
-            <a href="mailto:mansera.johnphillip@dnsc.edu.ph" class="btn btn-primary glow-effect">Transmit Message</a>
+            <a href="mailto:mansera.johnphillip@dnsc.edu.ph" class="btn btn-primary glow-effect play-sound" data-freq="900">Transmit Message</a>
             
             <p class="mono-subtext text-muted mt-3 copyright">
                 Designed & Engineered by John Phillip © <span id="year"></span>
             </p>
         </div>
     </footer>
+
+    <button id="unlock-audio" style="display:none;"></button>
 
     <script src="script.js"></script>
 </body>
